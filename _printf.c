@@ -35,7 +35,7 @@ int check_optional_fields(strQ *buffer, char *fail_flag)
 	{
 		if (chrpos("Lzjt", spec[i], 0) != -1)
 			i++;
-	}	
+	}
 
 	if (chrpos("diuxXopfFeEgGaAscbSrR", spec[i], 0) != -1)
 		i++;
@@ -47,9 +47,9 @@ int check_optional_fields(strQ *buffer, char *fail_flag)
 	return (i);
 }
 /**
- * get_fmt_spec - gets the format specifiers and stores them in the passed buffer
+ * get_fmt_spec - gets the format specifiers and stores them in the buffer
  * @buffer: main formatting specification buffer
- * @fmt_buffer: address of the buffer used to store the formatting parameters
+ * @fmt_buffer: address of the buffer used to store the format parameters
  * Return: number of bytes read from the buffer
  */
 int get_fmt_spec(strQ *buffer, strQ *fmt_buffer)
@@ -72,11 +72,13 @@ int get_fmt_spec(strQ *buffer, strQ *fmt_buffer)
  * print_formatted_token - prints the passed argument to printf formatted
  * @format: the main input formatting string
  * @buffer: the address of the main buffer used to store bytes to be read
+ * @w_bytes: the address for storing the number of written bytes
  * @i: the index of the @format string to continue reading from
  * @va: the va_list struct from which passed arguments are retrieved
  * Return: number of bytes read from the buffer
  */
-int print_formatted_token(const char *format, strQ *buffer, size_t *w_bytes, size_t i, va_list va)
+int print_formatted_token(const char *format, strQ *buffer,
+		size_t *w_bytes, size_t i, va_list va)
 {
 	int read;
 	strQ fmt_buffer;
@@ -119,9 +121,8 @@ void print_buffer(const char *format, strQ *tb, int *r_bytes, int *w_bytes)
 	int j;
 	char buffer[1024];
 	strQ token_buffer = *tb;
-	
-	do
-	{
+
+	do {
 		j = 0;
 		do
 			buffer[j++] = strQ_pop(&token_buffer);
