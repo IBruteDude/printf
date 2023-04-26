@@ -12,7 +12,9 @@ int print_formatted_int(strQ *fmt_buffer, va_list va)
 	int i;
 	UV char negative = 0, *str = (fmt_buffer->front);
 
-	if (*str == 'd' || *str == 'i')
+	switch (*str)
+	{
+	case 'd': case 'i':
 	{
 		i = va_arg(va, int);
 		str = int_to_str((i > INT32_MIN) ? abs(i) : INT32_MIN, 10, fmt_buffer);
@@ -20,6 +22,22 @@ int print_formatted_int(strQ *fmt_buffer, va_list va)
 			str[0] = '-';
 		else
 			strcpy(str, str + 1);
+		return (write(1, str, _strlen(str)));
+	}
+	case 'b':
+		i = va_arg(va, int);
+		str = int_to_str((i > INT32_MIN) ? abs(i) : INT32_MIN, 2, fmt_buffer);
+		strcpy(str, str + 1);
+		return (write(1, str, _strlen(str)));
+	case 'X':
+		i = va_arg(va, int);
+		str = int_to_str((i > INT32_MIN) ? abs(i) : INT32_MIN, 16, fmt_buffer);
+		strcpy(str, str + 1);
+		return (write(1, str, _strlen(str)));
+	case 'o':
+		i = va_arg(va, int);
+		str = int_to_str((i > INT32_MIN) ? abs(i) : INT32_MIN, 8, fmt_buffer);
+		strcpy(str, str + 1);
 		return (write(1, str, _strlen(str)));
 	}
 	return (0);

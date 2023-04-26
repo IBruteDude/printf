@@ -58,11 +58,11 @@ char *int_to_str(int num, size_t radix, UV strQ *custom)
 		str = malloc(4);
 		return (strcpy(str, "NaN"));
 	}
-	str = malloc(MAX_INT_LEN + 1 + 1);
+	str = malloc(64 + 1 + 1);
 	VALID_ALLOC(str);
 
-	str[MAX_INT_LEN + 1] = '\0';
-	for (i = MAX_INT_LEN; i > 0; i--)
+	str[64 + 1] = '\0';
+	for (i = 64; i > 0; i--)
 	{
 		n = (num / base) % radix;
 		str[i] = (n < 10) ? ('0' + n) : ('A' + n - 10);

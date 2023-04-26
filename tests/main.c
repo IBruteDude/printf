@@ -25,5 +25,14 @@ int main(void)
 	printf("my printf:\t%d\noriginal printf:\t%d\n",
 		_printf("Alsalam Alaicom, %i\nSalam\n", INT32_MIN),
 		printf("Alsalam Alaicom, %i\nSalam\n", INT32_MIN));
+	printf("my printf:\t%d\noriginal printf:\t%d\n",
+		_printf("Alsalam Alaicom, %b\nSalam\n", 22),
+		printf("Alsalam Alaicom, %b\nSalam\n", 22));
+	printf("my printf:\t%d\noriginal printf:\t%d\n",
+		_printf("Alsalam Alaicom, %X\nSalam\n", 22),
+		printf("Alsalam Alaicom, %X\nSalam\n", 22));
+	printf("my printf:\t%d\noriginal printf:\t%d\n",
+		_printf("Alsalam Alaicom, %o\nSalam\n", 22),
+		printf("Alsalam Alaicom, %o\nSalam\n", 22));
 	return (0);
 }
