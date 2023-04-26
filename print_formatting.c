@@ -10,7 +10,7 @@
 int print_formatted_int(strQ *fmt_buffer, va_list va)
 {
 	int i;
-	char negative = 0, *str = (fmt_buffer->front);
+	UV char negative = 0, *str = (fmt_buffer->front);
 
 	if (*str == 'd' || *str == 'i')
 	{
@@ -22,6 +22,7 @@ int print_formatted_int(strQ *fmt_buffer, va_list va)
 			strcpy(str, str + 1);
 		return (write(1, str, _strlen(str)));
 	}
+	return (0);
 }
 
 /**
@@ -32,9 +33,10 @@ int print_formatted_int(strQ *fmt_buffer, va_list va)
  * Return: The number of characters written to standard output.
  */
 
-int print_formatted_double(strQ *fmt_buffer, va_list va)
+int print_formatted_double(UV strQ *fmt_buffer, UV va_list va)
 {
 	/* TO DO */
+	return (0);
 }
 
 /**
@@ -56,6 +58,7 @@ int print_formatted_string(strQ *fmt_buffer, va_list va)
 		else
 			return (write(1, "(null)", 6));
 	}
+	return (0);
 }
 
 /**
@@ -74,4 +77,5 @@ int print_formatted_char(strQ *fmt_buffer, va_list va)
 		str[0] = (char) va_arg(va, int);
 		return (write(1, str, 1));
 	}
+	return (0);
 }

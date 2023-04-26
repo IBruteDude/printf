@@ -10,12 +10,14 @@
 #define isdigit(x) ('0' <= (x) && (x) <= '9')
 #define VALID_ALLOC(a) if (!(a)) (exit(EXIT_FAILURE));
 #define abs(a) (((a) >= 0) ? (a) : -(a))
+#define UV __attribute__((unused))
 
 size_t _strlen(const char *str);
 char *strcpy(char *dest, const char *src);
 char *strchr(const char *str, int c);
 int chrpos(const char *str, char c, int start);
 void strip(char *str);
+
 
 /**
  * struct constant_string_indexing_buffer - string buffer
@@ -45,6 +47,6 @@ int check_optional_fields(strQ *buffer, char *fail_flag);
 int get_fmt_spec(strQ *buffer, strQ *fmt_buffer);
 int print_formatted_token(const char *format, strQ *buffer,
 		size_t *w_bytes, size_t i, va_list va);
-void print_buffer(const char *format, strQ *tb, int *r_bytes, int *w_bytes);
+void print_buffer(const char *format, strQ *tb, size_t *r_bytes, size_t *w_bytes);
 int _printf(const char *format, ...);
 #endif

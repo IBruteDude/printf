@@ -7,9 +7,14 @@
 /* strlen("18446744073709551615") = 20 */
 #define MAX_INT_LEN 20
 
-char *interpret_spec(char *fmt_spec, strQ *out_string)
+char *interpret_spec(UV char *fmt_spec, strQ *out_string)
 {
 	/* TO DO */
+	UV char *c = out_string->front;
+
+	if (c != NULL)
+		return (c);
+	return (0);
 }
 
 /**
@@ -19,9 +24,14 @@ char *interpret_spec(char *fmt_spec, strQ *out_string)
  * Return: A pointer to the resulting string.
  */
 
-char *double_to_str(double num, strQ *custom)
+char *double_to_str(double UV num, UV strQ *custom)
 {
 	/* TO DO */
+	strQ c = *custom;
+
+	if (c.back != NULL)
+		return (custom->back);
+	return (0);
 }
 
 /**
@@ -32,7 +42,7 @@ char *double_to_str(double num, strQ *custom)
  * Return: A pointer to the resulting string.
  */
 
-char *int_to_str(int num, size_t radix, strQ *custom)
+char *int_to_str(int num, size_t radix, UV strQ *custom)
 {
 	int i;
 	uint64_t n, base = 1;

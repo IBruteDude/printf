@@ -21,14 +21,17 @@ int check_optional_fields(strQ *buffer, char *fail_flag)
 		while (isdigit(spec[i]))
 			i++;
 	if (spec[i] == '.')
+	{
 		if (spec[++i] == '*')
 			i++;
 		else
 			while (isdigit(spec[i]))
 				i++;
+	}
 	if (spec[i] == 'h' || spec[i] == 'l')
 	{
-		if (spec[i++] == spec[i])
+		i++;
+		if (spec[i - 1] == spec[i])
 			i++;
 	}
 	else
@@ -116,7 +119,7 @@ int print_formatted_token(const char *format, strQ *buffer,
  * @r_bytes: the address where the number of read bytes is stored
  * @w_bytes: the address where the number of written bytes is stored
  */
-void print_buffer(const char *format, strQ *tb, int *r_bytes, int *w_bytes)
+void print_buffer(const char *format, strQ *tb, size_t *r_bytes, size_t *w_bytes)
 {
 	int j;
 	char buffer[1024];
@@ -142,8 +145,8 @@ void print_buffer(const char *format, strQ *tb, int *r_bytes, int *w_bytes)
  */
 int _printf(const char *format, ...)
 {
-	size_t i, j, tbw, read_bytes, written_bytes, interpretted_bytes = 0, *n;
-	char fail_flag = 0, *str, write_buffer[1024];
+	UV size_t i, j, tbw, read_bytes, written_bytes, interpretted_bytes = 0, *n;
+	UV char fail_flag = 0, *str, write_buffer[1024];
 	strQ token_buffer;
 	va_list va;
 

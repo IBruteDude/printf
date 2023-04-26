@@ -69,7 +69,7 @@ int chrpos(const char *str, char c, int start)
 {
 	int i, idx = 0;
 
-	if (start >= 0 && str != NULL && start <= sizeof(str) - 1)
+	if (start >= 0 && str != NULL && start <= (int) sizeof(str) - 1)
 		for (i = start; str[i] != '\0'; i++)
 		{
 			if (str[i] == c)
