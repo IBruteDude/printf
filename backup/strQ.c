@@ -16,11 +16,11 @@ strQ *strQ_init(const char *str)
 		s->store = s->front = s->back = NULL;
 		return (s);
 	}
-	str_in = malloc(strlen(str) + 1);
+	str_in = malloc(_strlen(str) + 1);
 	VALID_ALLOC(str_in);
 	strcpy(str_in, str);
 	s->front = s->store = str_in;
-	s->back = str_in + strlen(str);
+	s->back = str_in + _strlen(str);
 	return (s);
 }
 
@@ -36,23 +36,6 @@ char strQ_pop(strQ *s)
 	VALID_ALLOC(s && s->store);
 	if (s->front < s->back)
 		c = *(s->front++);
-	else
-		c = '\0';
-	return (c);
-}
-
-/**
- * strQ_popB - pop the last element from a strQ
- * @s: the address of the strQ struct
- * Return: extracted char if any are left, or '\0' if it is empty
- */
-char strQ_popB(strQ *s)
-{
-	char c;
-
-	VALID_ALLOC(s);
-	if (s->front < s->back)
-		c = *((s->back--) - 1);
 	else
 		c = '\0';
 	return (c);

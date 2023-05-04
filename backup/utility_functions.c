@@ -1,11 +1,23 @@
 #include "main.h"
 
+
+/**
+ * strip - strips a string from leading zeros
+ * 
+ */
+void strip(char *str)
+{
+	if (str)
+		while (str[0] == '0' && _strlen(str) > 1)
+			strcpy (str, str + 1);
+}
+
 /**
  * strlen - find the length of a string
  * @str: input string
  * Return: length of the string
  */
-size_t strlen(const char *str)
+size_t _strlen(const char *str)
 {
 	size_t i = 0;
 
@@ -31,16 +43,6 @@ char *strcpy(char *dest, const char *src)
 }
 
 /**
- * strdup - makes a duplicate of a string
- * @s: input string
- * Return: created duplicate string address
- */
-char *strdup(const char *s)
-{
-	return (strcpy(malloc(strlen(s) + 1), s));
-}
-
-/**
  * strchr - find the address of a char inside a string
  * @str: input string
  * @c: specified char
@@ -57,7 +59,7 @@ char *strchr(const char *str, int c)
 }
 
 /**
- * chrpos - find the relative position of a char inside a string
+ * find the relative position of a char inside a string
  * @str: input string
  * @c: specified char
  * @start: starting position for searching
@@ -66,8 +68,8 @@ char *strchr(const char *str, int c)
 int chrpos(const char *str, char c, int start)
 {
 	int i, idx = 0;
-
-	if (start >= 0 && str != NULL && start <= (int) sizeof(str) - 1)
+	
+	if (start >= 0 && str != NULL && start <= sizeof(str) - 1)
 		for (i = start; str[i] != '\0'; i++)
 		{
 			if (str[i] == c)

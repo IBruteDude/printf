@@ -1,0 +1,15 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "main.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c",
+        "string.h": "c",
+        "cstdio": "c",
+        "cwchar": "c",
+        "stddef.h": "c",
+        "inttypes.h": "c",
+        "wchar.h": "c",
+        "stdbool.h": "c"
+    }
+}

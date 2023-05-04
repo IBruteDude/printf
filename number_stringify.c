@@ -1,12 +1,23 @@
 #include "main.h"
+#include <stdio.h>
+
+/**
+ * strip - strips a string from leading zeros
+ * @str: input string
+ */
+void strip(char *str)
+{
+	if (str)
+		while (str[0] == '0' && strlen(str) > 1)
+			strcpy(str, str + 1);
+}
+
 /**
  * interpret_spec - Interpret format specifier string, creates formatted string
+ * @fmt_spec: the format specification string
+ * @out_string: the output strQ holding the output formatted string
  * Return: A pointer to the formatted string.
  */
-
-/* strlen("18446744073709551615") = 20 */
-#define MAX_INT_LEN 20
-
 char *interpret_spec(UV char *fmt_spec, strQ *out_string)
 {
 	/* TO DO */
@@ -23,7 +34,6 @@ char *interpret_spec(UV char *fmt_spec, strQ *out_string)
  * @custom: Pointer to a buffer to hold the resulting string
  * Return: A pointer to the resulting string.
  */
-
 char *double_to_str(double UV num, UV strQ *custom)
 {
 	/* TO DO */
@@ -41,33 +51,45 @@ char *double_to_str(double UV num, UV strQ *custom)
  * @custom: Pointer to a buffer to hold the resulting string
  * Return: A pointer to the resulting string.
  */
-
-char *int_to_str(int num, size_t radix, UV strQ *custom)
+char *int_to_str(uint64_t num, size_t radix, UV strQ *custom)
 {
-	int i;
+	int i, INT_LEN;
 	uint64_t n, base = 1;
 	char *str;
 
-	if (num == INT32_MIN)
-	{
-		str = malloc(11);
-		return (strcpy(str, "-2147483648"));
-	}
-	if (radix == 0)
-	{
-		str = malloc(4);
-		return (strcpy(str, "NaN"));
-	}
-	str = malloc(64 + 1 + 1);
+	if (num == (uint64_t) INT32_MIN)
+		return (strdup("-2147483648"));
+	if (radix > 32 || radix < 2)
+		return (strdup("NaN"));
+
+	INT_LEN = ceil((64 / log2(radix)));
+	/* printf("%d\n", INT_LEN); */
+	str = malloc(INT_LEN + 1 + 1);
 	VALID_ALLOC(str);
 
-	str[64 + 1] = '\0';
-	for (i = 64; i > 0; i--)
+	str[INT_LEN + 1] = '\0';
+	for (i = INT_LEN; i > 0; i--)
 	{
 		n = (num / base) % radix;
-		str[i] = (n < 10) ? ('0' + n) : ('A' + n - 10);
+		str[i] = (n < 10) ? ('0' + n) : ('A' + (n - 10));
 		base *= radix;
 	}
 	strip(str + 1);
+	str[0] = '-';
+	return (str);
+}
+
+/**
+ * str_tolower - changes all characters in a string to lower case
+ * @str: input string
+ * Return: resulting modified string 
+ */
+char *str_tolower(char *str)
+{
+	int i = 0;
+
+	for (i = 0; str[i] != '\0'; i++)
+		if ('A' <= str[i] && str[i] <= 'Z')
+			str[i] += 'a' - 'A';
 	return (str);
 }
